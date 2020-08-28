@@ -7,31 +7,30 @@ const routes: Routes = [
   {
     path: "",
     component: PlacesPage,
+    children: [
+      {
+        path: "discover",
+        loadChildren: () =>
+          import("./discover/discover.module").then(
+            (m) => m.DiscoverPageModule
+          ),
+      },
+      {
+        path: "offers",
+        loadChildren: () =>
+          import("./offers/offers.module").then((m) => m.OffersPageModule),
+      },
+      {
+        path: "",
+        redirectTo: "/places/discover",
+        pathMatch: "full",
+      },
+    ],
   },
   {
-    path: "discover",
-    loadChildren: () =>
-      import("./discover/discover.module").then((m) => m.DiscoverPageModule),
-  },
-  {
-    path: "offers",
-    loadChildren: () =>
-      import("./offers/offers.module").then((m) => m.OffersPageModule),
-  },
-
-  {
-    path: "new-offer",
-    loadChildren: () =>
-      import("./offers/new-offer/new-offer.module").then(
-        (m) => m.NewOfferPageModule
-      ),
-  },
-  {
-    path: "edit-offer",
-    loadChildren: () =>
-      import("./offers/edit-offer/edit-offer.module").then(
-        (m) => m.EditOfferPageModule
-      ),
+    path: "",
+    redirectTo: "/places/discover",
+    pathMatch: "full",
   },
 ];
 
